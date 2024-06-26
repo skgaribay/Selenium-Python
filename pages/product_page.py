@@ -1,14 +1,16 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
+
 class ProductPage(BasePage):
     PAGE_TITLE = (By.CLASS_NAME, "title")
-    SORT_LOW_HIGH = (By.CSS_SELECTOR, "#header_container > div.header_secondary_container > div > span > select > option:nth-child(3)")
+    SORT_LOW_HIGH = (By.CSS_SELECTOR, 
+                     "#header_container > div.header_secondary_container > div > span > select > option:nth-child(3)")
     TO_CART_ONESIE = (By.ID, "add-to-cart-sauce-labs-onesie")
     TO_CART_BIKE = (By.ID, "add-to-cart-sauce-labs-bike-light")
     CART = (By.CLASS_NAME, "shopping_cart_link")
 
-    def get_pageTitle(self):
+    def get_page_title(self):
         page_title = self.wait_for_element(self.PAGE_TITLE)
         return page_title.text
     
@@ -27,5 +29,3 @@ class ProductPage(BasePage):
     def go_to_cart(self):
         cart = self.wait_for_clickable_element(self.CART)
         cart.click()
-    
-

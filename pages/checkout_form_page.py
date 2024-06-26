@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
+
 class CheckoutFormPage(BasePage):
     FIRSTNAME_FIELD = (By.ID, "first-name")
     LASTNAME_FIELD = (By.ID, "last-name")
@@ -17,12 +18,11 @@ class CheckoutFormPage(BasePage):
         lastname_field.clear()
         lastname_field.send_keys(lastname)
 
-    def enter_zip(self, zip):
+    def enter_zip(self, zipcode):
         zip_field = self.wait_for_element(self.ZIP_FIELD)
         zip_field.clear()
-        zip_field.send_keys(zip)
-        
+        zip_field.send_keys(zipcode)
+
     def go_continue(self):
         continue_button = self.wait_for_clickable_element(self.CONTINUE_BUTTON)
         continue_button.click()
-        

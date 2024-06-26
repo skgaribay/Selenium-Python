@@ -4,18 +4,17 @@ import pytest
 from selenium import webdriver
 from pages.page_object_manager import PageObjectManager
 
-# project_root = os.path.dirname(os.path.abspath(__file__))
-# chromeDriver_path = os.path.join(project_root, 'resources', 'drivers', 'chrome', 'chromedriver')
 
 @pytest.fixture(scope="function")
 def setup(request):
     driver = webdriver.Chrome()
-    driver.get("https://www.saucedemo.com/") 
+    driver.get("https://www.saucedemo.com/")
     driver.maximize_window()
     request.cls.page_manager = PageObjectManager(driver)
     request.cls.driver = driver
     yield
     driver.quit()
+
 
 user_data = [
     ("standard_user", "secret_sauce", "Larry", "David", "1101"),
@@ -26,48 +25,44 @@ user_data = [
     # ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
 ]
 
+
 @pytest.mark.usefixtures("setup")
 class TestE2E:
 
-    @pytest.mark.parametrize("username, password, firstName, lastName, zip", user_data)
-    def test_checkout_flow(self, username, password, firstName, lastName, zip):
-        
-        #login
+    @pytest.mark.parametrize("username, password, firstname, lastname, zipcode", user_data)
+    def test_checkout_flow(self, username, password, firstname, lastname, zipcode):
+        # login
         login_page = self.page_manager.get_login_page()
         login_page.enter_username(username)
         login_page.enter_password(password)
         login_page.click_login_button()
-        
-        #pick items, go to cart
+
+        # pick items, go to cart
         product_page = self.page_manager.get_product_page()
         product_page.sort_price_low_high()
         product_page.add_onesie()
-        #>get product name and price
+        # >get product name and price
         product_page.add_bike()
-        #>get product name and price
+        # >get product name and price
         product_page.go_to_cart()
-        
-        
-        #verify products in cart
+
+        # verify products in cart
         cart_page = self.page_manager.get_cart_page()
-        #>validate products
+        # >validate products
         cart_page.go_to_checkout()
-        
-        #fill-out checkout form
+
+        # fill-out checkout form
         checkout_form_page = self.page_manager.get_checkout_form_page()
-        checkout_form_page.enter_firstname(firstName)
-        checkout_form_page.enter_lastname(lastName)
-        checkout_form_page.enter_zip(zip)
+        checkout_form_page.enter_firstname(firstname)
+        checkout_form_page.enter_lastname(lastname)
+        checkout_form_page.enter_zip(zipcode)
         checkout_form_page.go_continue()
-        
-        #verify order details
+
+        # verify order details
         checkout_overview_page = self.page_manager.get_checkout_overview_page()
-        #>validate prices
+        # >validate prices
         checkout_overview_page.go_finish()
-        
-        #verify order complete
+
+        # verify order complete
         checkout_complete_page = self.page_manager.get_checkout_complete_page()
         assert "Thank you for your order!" == checkout_complete_page.get_thankyou()
-        
-        
-        
