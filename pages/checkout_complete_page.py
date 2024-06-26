@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-import time
 
 class CheckoutCompletePage(BasePage):
     THANK_YOU_TEXT = (By.CLASS_NAME, "complete-header")

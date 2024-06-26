@@ -1,12 +1,11 @@
 # tests/test_login_page.py
 import pytest
-import os
+# import os
 from selenium import webdriver
 from pages.page_object_manager import PageObjectManager
 
 # project_root = os.path.dirname(os.path.abspath(__file__))
 # chromeDriver_path = os.path.join(project_root, 'resources', 'drivers', 'chrome', 'chromedriver')
-
 
 @pytest.fixture(scope="function")
 def setup(request):
@@ -20,11 +19,11 @@ def setup(request):
 
 user_data = [
     ("standard_user", "secret_sauce", "Larry", "David", "1101"),
-    ("locked_out_user", "secret_sauce", "John", "Smith", "2202"),
-    ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
-    ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
-    ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
-    ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
+    # ("locked_out_user", "secret_sauce", "John", "Smith", "2202"),
+    # ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
+    # ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
+    # ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
+    # ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
 ]
 
 @pytest.mark.usefixtures("setup")

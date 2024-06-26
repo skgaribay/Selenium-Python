@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-import time
 
 class ProductPage(BasePage):
     PAGE_TITLE = (By.CLASS_NAME, "title")
