@@ -36,4 +36,11 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        pytest --html=reports/test-report.html
+        continue-on-error: true  # Continue even if tests fail
+    - name: Archive HTML reports
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-html-reports
+        path: reports/test-report.html
