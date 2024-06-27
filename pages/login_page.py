@@ -25,3 +25,12 @@ class LoginPage(BasePage):
     def check_for_error(self):
         error_container = self.find_element(self.ERROR_CONTAINER)
         return error_container
+
+    def get_error(self):
+        error_message = self.check_for_error()
+        return error_message.text
+
+    def login(self, username, password):
+        self.enter_username(username)
+        self.enter_password(password)
+        self.click_login_button()

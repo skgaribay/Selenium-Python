@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43a0a697-56a0-4820-8673-556ff43d3134" name="Changes" comment="" />
+    <list default="true" id="43a0a697-56a0-4820-8673-556ff43d3134" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/checkout_form_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout_form_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/old_test_e2e.py" beforeDir="false" afterPath="$PROJECT_DIR$/.backup/old_test_e2e.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_e2e.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_e2e.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +30,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "temp",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Krism/Code/Selenium-Python/tests",
     "node.js.detected.package.eslint": "true",
@@ -38,6 +44,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Krism\Code\Selenium-Python\tests" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Krism\Code\Selenium-Python\.backup" />
     </key>
   </component>
   <component name="SharedIndexes">

@@ -31,3 +31,12 @@ class CheckoutFormPage(BasePage):
     def check_for_error(self):
         error_container = self.find_element(self.ERROR_CONTAINER)
         return error_container
+
+    def get_error(self):
+        error_message = self.check_for_error()
+        return error_message.text
+
+    def complete_form(self, firstname, lastname, zipcode):
+        self.enter_firstname(firstname)
+        self.enter_lastname(lastname)
+        self.enter_zip(zipcode)
