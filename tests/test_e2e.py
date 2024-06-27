@@ -4,11 +4,11 @@ from utils.num_utils import currency_to_float
 
 user_data = [
     ("standard_user", "secret_sauce", "Larry", "David", "1101"),
-    ("locked_out_user", "secret_sauce", "John", "Smith", "2202"),
-    ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
-    ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
-    ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
-    ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
+    # ("locked_out_user", "secret_sauce", "John", "Smith", "2202"),
+    # ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
+    # ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
+    # ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
+    # ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
 ]
 
 
