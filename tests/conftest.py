@@ -21,11 +21,11 @@ def setup(request):
 
     if browser == "chrome":
         options = ChromeOptions()
-        # options.add_argument('--headless')  # Optional: Run Chrome in headless mode
+        options.add_argument('--headless')  # Optional: Run Chrome in headless mode
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
     elif browser == "firefox":
         options = FirefoxOptions()
-        # options.add_argument('--headless')  # Optional: Run Firefox in headless mode
+        options.add_argument('--headless')  # Optional: Run Firefox in headless mode
         driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
     else:
         raise ValueError(f"Browser '{browser}' is not supported")
