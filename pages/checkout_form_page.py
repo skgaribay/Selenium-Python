@@ -7,6 +7,7 @@ class CheckoutFormPage(BasePage):
     LASTNAME_FIELD = (By.ID, "last-name")
     ZIP_FIELD = (By.ID, "postal-code")
     CONTINUE_BUTTON = (By.ID, "continue")
+    ERROR_CONTAINER = (By.CLASS_NAME, "error-message-container")
 
     def enter_firstname(self, firstname):
         firstname_field = self.wait_for_element(self.FIRSTNAME_FIELD)
@@ -26,3 +27,7 @@ class CheckoutFormPage(BasePage):
     def go_continue(self):
         continue_button = self.wait_for_clickable_element(self.CONTINUE_BUTTON)
         continue_button.click()
+
+    def check_for_error(self):
+        error_container = self.find_element(self.ERROR_CONTAINER)
+        return error_container

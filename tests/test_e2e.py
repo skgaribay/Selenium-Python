@@ -1,12 +1,14 @@
 import pytest
+import math
+from utils.num_utils import currency_to_float
 
 user_data = [
     ("standard_user", "secret_sauce", "Larry", "David", "1101"),
     ("locked_out_user", "secret_sauce", "John", "Smith", "2202"),
-    # ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
-    # ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
-    # ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
-    # ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
+    ("problem_user", "secret_sauce", "Emily", "Johnson", "3303"),
+    ("performance_glitch_user", "secret_sauce", "Michael", "Williams", "4404"),
+    ("error_user", "secret_sauce", "Jessica", "Brown", "5505"),
+    ("visual_user", "secret_sauce", "Daniel", "Jones", "6606")
 ]
 
 
@@ -41,6 +43,7 @@ class TestE2E:
 
         # verify products in cart
         cart_items = cart_page.get_items()
+        # verify that the items and prices are correct (relative to products page)
         for product, item in zip(products, cart_items):
             if product[0] != item[0]:
                 errors.append(f"Product {product[0]} != cart item: {item[0]} ")
@@ -53,9 +56,31 @@ class TestE2E:
         checkout_form_page.enter_lastname(lastname)
         checkout_form_page.enter_zip(zipcode)
         checkout_form_page.go_continue()
+        assert checkout_form_page.check_for_error() is None, "Form validation error."
 
         # verify order details
-        # >validate prices
+        overview_items = checkout_overview_page.get_items()
+        # verify that the items and prices are correct (relative to cart page)
+        for c_item, o_item in zip(cart_items, overview_items):
+            if c_item[0] != o_item[0]:
+                errors.append(f"cart item {c_item[0]} != overview item {o_item[0]} ")
+            if c_item[1] != o_item[1]:
+                errors.append(f"cart item price {c_item[1]} != overview item price {o_item[1]} ")
+
+        # calculate actual prices and tax
+        prices = checkout_overview_page.get_prices()
+        item_price1 = currency_to_float(overview_items[0][1])
+        item_price2 = currency_to_float(overview_items[1][1])
+        actual_item_total = item_price1 + item_price2
+        actual_tax_value = int(actual_item_total * 8.01) / 100.00
+        actual_price_total = actual_item_total + actual_tax_value
+
+        # verify actual and expected values
+        if actual_item_total != prices[0]:
+            errors.append(f"Item Total: {actual_item_total} != {prices[0]} ")
+        if not math.isclose(actual_price_total, prices[1]):
+            errors.append(f"Price Total: {actual_price_total} != {prices[1]} ")
+
         checkout_overview_page.go_finish()
 
         # verify order complete
