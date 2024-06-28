@@ -31,3 +31,6 @@ class BasePage:
             return element
         except TimeoutException:
             raise AssertionError(f"Clickable element {locator} not found within {timeout} seconds")
+
+    def wait_for_url(self, url, timeout=10):
+        WebDriverWait(self.driver,  timeout).until(ec.url_to_be(url))

@@ -13,9 +13,18 @@ class CheckoutOverviewPage(BasePage):
     TAX_VALUE = (By.CLASS_NAME, "summary_tax_label")
     PRICE_TOTAL = (By.CLASS_NAME, "summary_total_label")
 
+    CHECKOUT_COMPLETE_URL = "https://www.saucedemo.com/checkout-complete.html"
+
     def go_finish(self):
         finish_button = self.wait_for_clickable_element(self.FINISH_BUTTON)
-        finish_button.click()
+
+        try:
+            finish_button.click()
+            self.wait_for_url(self.CHECKOUT_COMPLETE_URL)
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def get_items(self):
         name1 = self.find_element(self.FIRST_ITEM_NAME).text

@@ -13,6 +13,8 @@ class ProductPage(BasePage):
     FIRST_ITEM_PRICE = (By.CSS_SELECTOR, "div[class='inventory_list'] div:nth-child(1) div:nth-child(2) div:nth-child(2) div:nth-child(1)")
     SECOND_ITEM_PRICE = (By.CSS_SELECTOR, "div[id='inventory_container'] div:nth-child(2) div:nth-child(2) div:nth-child(2) div:nth-child(1)")
 
+    CART_URL = "https://www.saucedemo.com/cart.html"
+
     def get_page_title(self):
         page_title = self.wait_for_element(self.PAGE_TITLE)
         return page_title.text
@@ -31,7 +33,15 @@ class ProductPage(BasePage):
         
     def go_to_cart(self):
         cart = self.wait_for_clickable_element(self.CART)
-        cart.click()
+
+        try:
+            cart.click()
+            self.wait_for_url(self.CART_URL)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
 
     def get_items(self):
         name1 = self.find_element(self.FIRST_ITEM_NAME).text
