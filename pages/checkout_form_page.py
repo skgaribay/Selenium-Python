@@ -9,6 +9,8 @@ class CheckoutFormPage(BasePage):
     CONTINUE_BUTTON = (By.ID, "continue")
     ERROR_CONTAINER = (By.CLASS_NAME, "error-message-container")
 
+    CHECKOUT_OVERVIEW_URL = "https://www.saucedemo.com/checkout-step-two.html"
+
     def enter_firstname(self, firstname):
         firstname_field = self.wait_for_element(self.FIRSTNAME_FIELD)
         firstname_field.clear()
@@ -26,8 +28,24 @@ class CheckoutFormPage(BasePage):
 
     def go_continue(self):
         continue_button = self.wait_for_clickable_element(self.CONTINUE_BUTTON)
-        continue_button.click()
+
+        try:
+            continue_button.click()
+            self.wait_for_url(self.CHECKOUT_OVERVIEW_URL)
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     def check_for_error(self):
         error_container = self.find_element(self.ERROR_CONTAINER)
         return error_container
+
+    def get_error(self):
+        error_message = self.check_for_error()
+        return error_message.text
+
+    def complete_form(self, firstname, lastname, zipcode):
+        self.enter_firstname(firstname)
+        self.enter_lastname(lastname)
+        self.enter_zip(zipcode)
